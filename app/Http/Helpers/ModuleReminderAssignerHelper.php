@@ -33,7 +33,7 @@ class ModuleReminderAssignerHelper
             return response()->json([
                 'success' => false,
                 'message' => 'User has no purchased products.'
-            ]);
+            ], 422);
         }
 
         $tag = $this->getTagForUser($user);
@@ -46,7 +46,7 @@ class ModuleReminderAssignerHelper
             'message' => $result
                             ? 'Tag submitted successfully: ' . $tag->name
                             : 'There was an error adding the tag to Infusionsoft'
-        ]);
+        ], $result ? 200 : 422);
     }
 
     /**
