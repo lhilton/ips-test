@@ -13,3 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::namespace('Api')
+    ->name('api.')
+    ->group(function () {
+        Route::resource('module_reminder_assigner', 'ModuleReminderAssignerController')
+            ->only('store');
+});
