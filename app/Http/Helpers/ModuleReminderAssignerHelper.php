@@ -13,7 +13,7 @@ class ModuleReminderAssignerHelper
 
     public function __construct()
     {
-        $this->iHelper = new InfusionsoftHelper();
+        $this->iHelper = app()->make(InfusionsoftHelper::class);
     }
 
     /**
@@ -28,11 +28,19 @@ class ModuleReminderAssignerHelper
     {
         $user = $this->getUserFromEmail($email);
 
+        if(! $user->infusionsoft_id)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'User has no infusionsoft account'
+            ], 422);
+        }
+
         if(count($user->products) === 0)
         {
             return response()->json([
                 'success' => false,
-                'message' => 'User has no purchased products.'
+                'message' => 'User has no purchased products'
             ], 422);
         }
 

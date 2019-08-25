@@ -31,7 +31,7 @@ class GetModuleTags extends Command
      */
     public function __construct()
     {
-        $this->infusionsoft = new InfusionsoftHelper();
+        $this->infusionsoft = app()->make(InfusionsoftHelper::class);
         parent::__construct();
     }
 
