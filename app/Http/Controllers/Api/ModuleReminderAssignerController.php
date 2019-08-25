@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\ModuleReminderAssignerHelper;
 use App\Http\Requests\ModuleReminderAssignerRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ModuleReminderAssignerController extends Controller
 {
@@ -17,6 +16,7 @@ class ModuleReminderAssignerController extends Controller
      */
     public function store(ModuleReminderAssignerRequest $request)
     {
-        return response()->json(['success' => true, 'message' => null]);
+        $mraHelper = new ModuleReminderAssignerHelper();
+        return $mraHelper->sendModuleReminderForUser($request->input('email'));
     }
 }
